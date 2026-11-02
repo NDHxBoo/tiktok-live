@@ -1,0 +1,60 @@
+{
+  "game": {
+    "maxCells": 24,
+    "idleSeconds": 120,
+    "maxSentenceSeconds": 3600,
+    "commentCooldownSeconds": 2,
+    "likesPerReduction": 50,
+    "likeReductionSeconds": 5,
+    "followImmunity": 1,
+    "wardenMinutes": 5,
+    "bailMemorySeconds": 180
+  },
+  "crimes": [
+    { "keyword": "trộm gà", "seconds": 60, "label": "Trộm gà 🐔" },
+    { "keyword": "ăn vụng", "seconds": 120, "label": "Ăn vụng 🍗" },
+    { "keyword": "quỵt nợ trà sữa", "seconds": 180, "label": "Quỵt nợ trà sữa 🧋" },
+    { "keyword": "hái trộm xoài", "seconds": 90, "label": "Hái trộm xoài 🥭" },
+    { "keyword": "ngủ nướng", "seconds": 45, "label": "Ngủ nướng 😴" }
+  ],
+  "gifts": {
+    "small": {
+      "displayName": "Quà nhỏ (Hoa hồng)",
+      "names": ["Rose", "Hoa hồng", "TikTok", "Finger Heart"],
+      "ids": [],
+      "minDiamonds": 1,
+      "reduceSeconds": 30
+    },
+    "medium": {
+      "displayName": "Quà vừa (Bánh donut)",
+      "names": ["Doughnut", "Perfume", "Donut"],
+      "ids": [],
+      "minDiamonds": 10
+    },
+    "large": {
+      "displayName": "Quà lớn (Hand Hearts)",
+      "names": ["Hand Hearts", "Corgi"],
+      "ids": [],
+      "minDiamonds": 100
+    },
+    "huge": {
+      "displayName": "Quà rất lớn (Money Gun)",
+      "names": ["Money Gun", "Galaxy", "Lion", "Universe"],
+      "ids": [],
+      "minDiamonds": 500
+    },
+    "useDiamondFallback": true
+  },
+  "bannedWords": [
+    "đm", "dm", "đcm", "dcm", "dmm", "vcl", "vkl", "vl", "clm", "cl", "cc", "đéo", "đĩ", "địt", "dit",
+    "lồn", "buồi", "cặc", "đụ", "du ma", "đụ má", "óc chó", "occho", "fuck", "shit", "bitch", "cunt", "dick"
+  ],
+  "ticker": [
+    "🚔 Chào mừng tới ĐI TÙ ONLINE – trại giam vui vẻ nhất TikTok!",
+    "🙅 Chỉ có thể tự đưa MÌNH vào tù, không tống được người khác!",
+    "🎮 Game chỉ để giải trí, không cược, không đổi thưởng."
+  ],
+  "audio": {
+    "volume": 0.7
+  }
+}

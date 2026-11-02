@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Đi Tù Online – Overlay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/overlay.css" />
+</head>
+<body>
+  <!-- Sân khấu cố định 1080x1920, tự co giãn vừa cửa sổ -->
+  <div id="stage">
+    <div class="sky">
+      <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+    </div>
+
+    <header id="header">
+      <div class="sign">
+        <div class="sign-title">ĐI TÙ <span>ONLINE</span></div>
+        <div class="sign-sub">🍩 Trại Giam Bánh Bao – chỉ để vui! 🍩</div>
+      </div>
+      <div id="warden" class="warden hidden">
+        <div class="warden-crown">👑</div>
+        <div class="warden-avatar avatar"></div>
+        <div class="warden-info">
+          <div class="warden-label">CAI NGỤC HIỆN TẠI</div>
+          <div class="warden-name"></div>
+        </div>
+        <div class="warden-time"></div>
+      </div>
+    </header>
+
+    <section id="boards">
+      <div class="board danger">
+        <h3>🔥 Tội phạm nguy hiểm nhất</h3>
+        <ol id="board-danger"></ol>
+      </div>
+      <div class="board good">
+        <h3>😇 Người tốt nhất</h3>
+        <ol id="board-good"></ol>
+      </div>
+    </section>
+
+    <section id="prison">
+      <div id="grid"></div>
+      <div id="wall-fx"></div>
+      <div id="paused" class="hidden"><div class="stamp">TẠM ĐÓNG CỬA</div></div>
+      <div id="invite" class="hidden">
+        <div class="invite-card">
+          <div class="invite-title">🔦 Đang đi tuần…</div>
+          <div class="invite-text">Trại giam vắng tanh! Gõ</div>
+          <div class="invite-crime" id="invite-crime">"trộm gà"</div>
+          <div class="invite-text small">để vào tù chơi cho vui nào! 😆</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="yard">
+      <div id="toasts"></div>
+      <div class="road"></div>
+      <div id="patrol" class="hidden"></div>
+    </section>
+
+    <footer id="ticker"><div class="ticker-track" id="ticker-track"></div></footer>
+
+    <div id="fx-layer"></div>
+    <div id="flash"></div>
+  </div>
+
+  <button id="sound-unlock" class="hidden">🔊 Bấm để bật âm thanh</button>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/art.js"></script>
+  <script src="/js/sound.js"></script>
+  <script src="/js/overlay.js"></script>
+</body>
+</html>

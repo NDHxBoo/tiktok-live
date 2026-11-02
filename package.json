@@ -1,0 +1,31 @@
+{
+  "name": "di-tu-online",
+  "version": "1.0.0",
+  "description": "Game TikTok Live \"Đi Tù Online\" – người xem điều khiển bằng bình luận và quà tặng",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "node --test \"test/**/*.test.js\"",
+    "sounds": "node scripts/generate-sounds.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NDHxBoo/tiktok-live.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NDHxBoo/tiktok-live/issues"
+  },
+  "homepage": "https://github.com/NDHxBoo/tiktok-live#readme",
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^4.22.3",
+    "socket.io": "^4.8.4",
+    "tiktok-live-connector": "^2.4.4"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  }
+}
