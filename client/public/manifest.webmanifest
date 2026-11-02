@@ -1,0 +1,17 @@
+{
+  "name": "Đi Tù Online 3D",
+  "short_name": "Đi Tù Online",
+  "description": "Nhà tù hoạt hình 3D vui nhộn – nhiều người chơi, vào ngay không cần đăng nhập.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#8fd6ff",
+  "theme_color": "#7b5cff",
+  "lang": "vi",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,6 +1,12 @@
 {
+  "rooms": {
+    "maxPlayers": 30,
+    "prefix": "tu",
+    "maxRooms": 50,
+    "liveRoom": "tu-1"
+  },
   "game": {
-    "maxCells": 24,
+    "cellCapacity": 6,
     "idleSeconds": 120,
     "maxSentenceSeconds": 3600,
     "commentCooldownSeconds": 2,
@@ -8,14 +14,24 @@
     "likeReductionSeconds": 5,
     "followImmunity": 1,
     "wardenMinutes": 5,
-    "bailMemorySeconds": 180
+    "bailMemorySeconds": 180,
+    "webBailCooldownSeconds": 60,
+    "maxTiktokActors": 40,
+    "tiktokDespawnSeconds": 300,
+    "chatMaxLength": 60,
+    "chatCooldownSeconds": 1.2,
+    "digKeyword": "đào",
+    "digTapPercent": 0.35,
+    "digDecayPercentPerSecond": 0.5,
+    "digCooldownSeconds": 60
   },
   "crimes": [
     { "keyword": "trộm gà", "seconds": 60, "label": "Trộm gà 🐔" },
     { "keyword": "ăn vụng", "seconds": 120, "label": "Ăn vụng 🍗" },
     { "keyword": "quỵt nợ trà sữa", "seconds": 180, "label": "Quỵt nợ trà sữa 🧋" },
     { "keyword": "hái trộm xoài", "seconds": 90, "label": "Hái trộm xoài 🥭" },
-    { "keyword": "ngủ nướng", "seconds": 45, "label": "Ngủ nướng 😴" }
+    { "keyword": "ngủ nướng", "seconds": 45, "label": "Ngủ nướng 😴" },
+    { "keyword": "hát karaoke lúc nửa đêm", "seconds": 150, "label": "Karaoke nửa đêm 🎤" }
   ],
   "gifts": {
     "small": {
@@ -26,7 +42,7 @@
       "reduceSeconds": 30
     },
     "medium": {
-      "displayName": "Quà vừa (Bánh donut)",
+      "displayName": "Quà vừa (Donut)",
       "names": ["Doughnut", "Perfume", "Donut"],
       "ids": [],
       "minDiamonds": 10
@@ -47,14 +63,11 @@
   },
   "bannedWords": [
     "đm", "dm", "đcm", "dcm", "dmm", "vcl", "vkl", "vl", "clm", "cl", "cc", "đéo", "đĩ", "địt", "dit",
-    "lồn", "buồi", "cặc", "đụ", "du ma", "đụ má", "óc chó", "occho", "fuck", "shit", "bitch", "cunt", "dick"
+    "lồn", "buồi", "cặc", "đụ", "đụ má", "óc chó", "occho", "fuck", "shit", "bitch", "cunt", "dick"
   ],
   "ticker": [
     "🚔 Chào mừng tới ĐI TÙ ONLINE – trại giam vui vẻ nhất TikTok!",
     "🙅 Chỉ có thể tự đưa MÌNH vào tù, không tống được người khác!",
-    "🎮 Game chỉ để giải trí, không cược, không đổi thưởng."
-  ],
-  "audio": {
-    "volume": 0.7
-  }
+    "🎮 Game chỉ để giải trí, không cược, không nạp tiền, không đổi thưởng."
+  ]
 }

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Đi Tù Online – Quản trị</title>
+</head>
+<body class="admin">
+  <section id="login" class="login">
+    <form id="login-form" class="box">
+      <h1>🔐 Quản trị Đi Tù Online</h1>
+      <input id="pw" type="password" placeholder="Mật khẩu (ADMIN_PASSWORD)" autocomplete="current-password" />
+      <button>Đăng nhập</button>
+      <p id="login-msg" class="hint"></p>
+    </form>
+  </section>
+
+  <main id="app" class="hidden">
+    <header class="top">
+      <h1>🚔 Quản trị <small>Đi Tù Online 3D</small></h1>
+      <div class="pills"><span id="p-tiktok" class="pill">TikTok</span><span id="p-live" class="pill">Live</span></div>
+    </header>
+    <div class="grid">
+      <div class="col">
+        <div class="box">
+          <h2>🏠 Phòng</h2>
+          <table class="tbl"><thead><tr><th>Phòng</th><th>Web</th><th>TikTok</th><th>Ở tù</th><th>Xem live</th><th></th></tr></thead><tbody id="rooms"></tbody></table>
+        </div>
+        <div class="box">
+          <h2>👥 Trong phòng <span id="d-name"></span></h2>
+          <div class="row"><button id="d-clear" class="warn">🧹 Xoá chat</button><button id="d-reset" class="ghost">🔓 Thả hết tù nhân</button></div>
+          <table class="tbl"><thead><tr><th>Tên</th><th>Loại</th><th>Trạng thái</th><th>IP</th><th></th></tr></thead><tbody id="actors"></tbody></table>
+          <h3>💬 Chat gần đây</h3>
+          <div id="d-chat" class="log small"></div>
+        </div>
+        <div class="box">
+          <h2>🚫 Danh sách chặn</h2>
+          <div id="bans"></div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="box">
+          <h2>📡 TikTok LIVE</h2>
+          <div class="row"><input id="tt-user" placeholder="username TikTok" /><input id="tt-room" placeholder="phòng live (tu-1)" style="width:120px" /></div>
+          <div class="row"><button id="tt-connect">Kết nối</button><button id="tt-off" class="ghost">Ngắt</button><label><input type="checkbox" id="demo" /> 🤖 Bot demo</label></div>
+          <p class="hint" id="tt-status"></p>
+        </div>
+        <div class="box">
+          <h2>🧪 Sự kiện giả (như người xem TikTok)</h2>
+          <div class="row"><input id="f-room" placeholder="phòng (trống = phòng live)" style="width:150px" /><input id="f-nick" value="Tester" /><button id="f-rand" class="ghost">🎲</button></div>
+          <div class="row"><input id="f-comment" class="grow" placeholder="bình luận: trộm gà / @ten cứu với / đào" /><button id="f-chat">💬 Gửi</button></div>
+          <div class="row" id="f-crimes"></div>
+          <div class="row"><button data-gift="small">🌹 Quà nhỏ</button><button data-gift="medium">🍩 Quà vừa</button><button data-gift="large">💥 Quà lớn</button><button data-gift="huge">👑 Rất lớn</button></div>
+          <div class="row"><input id="f-gname" placeholder="tên quà TikTok" /><input id="f-dia" type="number" placeholder="kim cương" style="width:100px" /><input id="f-count" type="number" value="1" style="width:60px" /><button id="f-gift">🎁 Tặng</button></div>
+          <div class="row"><input id="f-likes" type="number" value="50" style="width:80px" /><button id="f-like">❤️ Like</button><button id="f-follow">➕ Follow</button></div>
+          <p class="hint" id="f-res"></p>
+        </div>
+        <div class="box">
+          <h2>📋 Nhật ký</h2>
+          <div id="log" class="log"></div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="box">
+          <h2>⚖️ Tội & mức án</h2>
+          <table class="tbl edit"><thead><tr><th>Từ khoá</th><th>Giây</th><th>Nhãn</th><th></th></tr></thead><tbody id="crimes"></tbody></table>
+          <div class="row"><button id="crime-add" class="ghost">➕ Thêm</button></div>
+        </div>
+        <div class="box">
+          <h2>🎁 Bảng quà</h2>
+          <div id="gifts"></div>
+          <label class="row"><input type="checkbox" id="g-fallback" /> Không khớp tên/id thì xếp hạng theo số kim cương</label>
+        </div>
+        <div class="box">
+          <h2>⚙️ Thông số</h2>
+          <div id="settings" class="kv"></div>
+        </div>
+        <div class="box">
+          <h2>🚫 Từ cấm & 📜 chữ chạy</h2>
+          <textarea id="banned" rows="3"></textarea>
+          <textarea id="ticker" rows="3" placeholder="mỗi dòng một câu"></textarea>
+        </div>
+        <button id="save" class="big">💾 Lưu toàn bộ cấu hình</button>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="/src/admin.js"></script>
+</body>
+</html>

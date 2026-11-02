@@ -1,0 +1,36 @@
+# Chạy trên VPS:  docker compose up -d --build
+# Caddy tự xin chứng chỉ HTTPS miễn phí (cần cho PWA cài lên màn hình chính).
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - NODE_ENV=production
+      - HOST=0.0.0.0
+      - PORT=3000
+      - TRUST_PROXY=true
+    volumes:
+      - ./config.json:/app/config.json   # sửa tội/quà ở /admin sẽ lưu ra file này
+      - ./logs:/app/logs
+      - ./data:/app/data                  # danh sách chặn
+    expose:
+      - "3000"
+
+  caddy:
+    image: caddy:2.8-alpine
+    restart: unless-stopped
+    depends_on: [app]
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DOMAIN=${DOMAIN:-localhost}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:

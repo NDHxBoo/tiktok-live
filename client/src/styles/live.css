@@ -1,0 +1,60 @@
+@import './common.css';
+
+/* Lớp giao diện cố định 1080x1920 đặt trên khung 3D */
+#stage { position: fixed; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; pointer-events: none; z-index: 5; }
+.l-head { position: absolute; top: 24px; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; }
+.l-sign { background: var(--yellow); border: 7px solid var(--ink); border-radius: 30px; padding: 0 40px 4px; font-size: 80px; font-weight: 800; line-height: 1.1; box-shadow: 0 9px 0 var(--ink); transform: rotate(-1.5deg); }
+.l-sign span { color: var(--pink); }
+.l-room { margin-top: 12px; font-size: 26px; font-weight: 800; color: #fff; text-shadow: 0 3px 0 var(--ink), 0 0 6px var(--ink); }
+.l-warden { position: absolute; top: 200px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 14px; background: linear-gradient(90deg, #ffe680, #ffb84d); border: 6px solid var(--ink); border-radius: 999px; padding: 4px 26px 4px 8px; box-shadow: 0 6px 0 var(--ink); white-space: nowrap; }
+.l-warden .crown { position: absolute; left: 18px; top: -40px; font-size: 46px; }
+.l-warden .av { width: 58px; height: 58px; font-size: 28px; }
+.l-warden small { display: block; font-size: 18px; font-weight: 800; color: #8a3b00; line-height: 1; }
+.l-warden b { font-size: 34px; }
+.l-warden .time { font-size: 32px; font-weight: 800; background: var(--ink); color: var(--yellow); border-radius: 999px; padding: 0 16px; }
+
+.av { width: 34px; height: 34px; border-radius: 50%; border: 3px solid var(--ink); background: var(--purple); color: #fff; display: inline-grid; place-items: center; font-weight: 800; overflow: hidden; flex: 0 0 auto; }
+.av img { width: 100%; height: 100%; object-fit: cover; }
+
+.l-boards { position: absolute; top: 290px; left: 24px; right: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.l-board { background: rgba(255, 248, 236, 0.93); border: 5px solid var(--ink); border-radius: 24px; padding: 6px 14px 10px; box-shadow: 0 6px 0 var(--ink); min-height: 250px; }
+.l-board h3 { margin: 0 0 4px; font-size: 27px; text-align: center; color: #fff; border-radius: 12px; text-shadow: 0 2px 0 var(--ink), 2px 0 0 var(--ink), -2px 0 0 var(--ink), 0 -2px 0 var(--ink); }
+.l-board.danger h3 { background: var(--red); }
+.l-board.good h3 { background: var(--mint); }
+.l-board ol { list-style: none; margin: 0; padding: 0; }
+.l-board li { display: flex; align-items: center; gap: 8px; height: 38px; font-size: 25px; font-weight: 700; }
+.l-board .rank { width: 32px; text-align: center; }
+.l-board .nm { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.l-board .val { font-weight: 800; color: var(--purple); }
+.l-board .empty { text-align: center; opacity: 0.55; font-size: 22px; padding-top: 60px; }
+
+.l-tunnel { position: absolute; top: 580px; left: 160px; right: 160px; height: 46px; border: 5px solid var(--ink); border-radius: 999px; background: rgba(233, 225, 255, 0.92); overflow: hidden; font-size: 24px; font-weight: 800; }
+.l-tunnel span { position: absolute; inset: 0; line-height: 36px; text-align: center; white-space: nowrap; z-index: 1; }
+.l-tunnel i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #c98b5e, #ffcf3f); transition: width 0.4s; }
+.l-tunnel.cool { opacity: 0.6; }
+
+.l-banner { position: absolute; top: 880px; left: 50%; transform: translateX(-50%); min-width: 760px; text-align: center; background: var(--yellow); border: 8px solid var(--ink); border-radius: 40px; box-shadow: 0 12px 0 var(--ink); padding: 14px 40px; animation: pop 0.5s cubic-bezier(.2,1.6,.4,1); }
+.l-banner .big { font-size: 74px; font-weight: 800; line-height: 1; color: var(--red); -webkit-text-stroke: 2px var(--ink); paint-order: stroke fill; }
+.l-banner.gold .big { color: #fff; }
+.l-banner .small { font-size: 34px; font-weight: 700; margin-top: 6px; }
+
+.l-invite { position: absolute; top: 760px; left: 90px; right: 90px; text-align: center; background: rgba(255, 248, 236, 0.95); border: 8px solid var(--ink); border-radius: 40px; box-shadow: 0 12px 0 var(--ink); padding: 26px; font-size: 46px; font-weight: 700; animation: bob 2.4s ease-in-out infinite; }
+.l-invite-title { color: var(--purple); font-size: 40px; font-weight: 800; }
+.l-invite-crime { font-size: 88px; font-weight: 800; color: var(--pink); -webkit-text-stroke: 2px var(--ink); paint-order: stroke fill; }
+.l-invite .small { font-size: 36px; }
+@keyframes bob { 50% { transform: translateY(-10px); } }
+
+.l-toasts { position: absolute; left: 24px; right: 24px; bottom: 110px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.l-toasts .toast { font-size: 30px; border-width: 5px; padding: 2px 26px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 1030px; }
+.toast.red { background: #ffd5da; }
+.toast.green { background: #d5fff0; }
+.toast.gold { background: #fff0b3; }
+.toast.blue { background: #dcd5ff; }
+
+.l-ticker { position: absolute; left: 0; right: 0; bottom: 0; height: 84px; background: var(--ink); border-top: 6px solid var(--yellow); overflow: hidden; display: flex; align-items: center; }
+.l-track { white-space: nowrap; font-size: 38px; font-weight: 700; color: #fff; padding-left: 1080px; animation: ticker 40s linear infinite; }
+.l-track b { color: var(--yellow); }
+.l-track em { color: var(--pink); font-style: normal; }
+@keyframes ticker { to { transform: translateX(-100%); } }
+
+#sound-unlock { position: fixed; right: 12px; bottom: 12px; z-index: 50; font: 700 18px var(--font); padding: 8px 16px; border-radius: 999px; border: 3px solid var(--ink); background: var(--yellow); cursor: pointer; }

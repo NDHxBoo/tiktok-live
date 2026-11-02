@@ -1,0 +1,5 @@
+# Đổi DOMAIN trong .env thành tên miền của bạn (đã trỏ bản ghi A về IP VPS)
+{$DOMAIN} {
+	encode gzip zstd
+	reverse_proxy app:3000
+}

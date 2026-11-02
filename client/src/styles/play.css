@@ -1,0 +1,66 @@
+@import './common.css';
+
+/* Màn hình bắt đầu */
+.sheet-screen { position: fixed; inset: 0; display: grid; place-items: center; padding: 16px; background: rgba(30, 20, 60, 0.35); z-index: 20; overflow-y: auto; }
+.start-card { width: min(460px, 100%); padding: 18px 18px 14px; max-height: calc(100dvh - 32px); overflow-y: auto; }
+.logo { font-size: 46px; font-weight: 800; line-height: 1; text-align: center; letter-spacing: 1px; }
+.logo span { color: var(--pink); }
+.sub { text-align: center; margin: 6px 0 10px; font-weight: 600; }
+.field { display: block; margin: 10px 0; }
+.field > span { display: block; font-weight: 800; margin-bottom: 4px; }
+.field input { width: 100%; font: 700 20px var(--font); padding: 8px 12px; border: 3px solid var(--ink); border-radius: 12px; background: #fff; color: var(--ink); }
+.crime-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.crime { font: 700 15px var(--font); text-align: left; border: 3px solid var(--ink); border-radius: 12px; background: #fff; padding: 6px 10px; cursor: pointer; display: flex; flex-direction: column; color: var(--ink); }
+.crime span { font-size: 13px; color: #8a3b6b; }
+.crime.on { background: var(--pink); color: #fff; }
+.crime.on span { color: #fff; }
+
+/* HUD */
+#hud { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
+#hud > * { pointer-events: auto; }
+.topbar { position: absolute; top: max(10px, env(safe-area-inset-top)); left: 10px; display: flex; gap: 8px; align-items: center; }
+.pill { background: var(--paper); border: 3px solid var(--ink); border-radius: 999px; padding: 2px 12px; font-weight: 800; font-size: 15px; }
+.icon-btn { width: 40px; height: 40px; border-radius: 50%; border: 3px solid var(--ink); background: var(--paper); font-size: 18px; cursor: pointer; }
+.status-card { position: absolute; top: calc(max(10px, env(safe-area-inset-top)) + 50px); right: 10px; background: var(--paper); border: 3px solid var(--ink); border-radius: 16px; padding: 4px 12px 6px; min-width: 150px; max-width: 46vw; box-shadow: 0 3px 0 var(--ink); }
+.status-card:empty { display: none; }
+.st-time { font-weight: 800; font-size: 20px; font-variant-numeric: tabular-nums; }
+.st-sub { font-size: 13px; font-weight: 600; color: #5a4a8a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tunnel { position: relative; margin-top: 4px; height: 20px; background: #e9e1ff; border: 2px solid var(--ink); border-radius: 10px; overflow: hidden; font-size: 11px; font-weight: 800; }
+.tunnel span { position: absolute; inset: 0; line-height: 16px; text-align: center; white-space: nowrap; z-index: 1; }
+.tunnel i { display: block; height: 100%; background: linear-gradient(90deg, #c98b5e, #ffcf3f); transition: width 0.3s; }
+.warden-banner { position: absolute; top: calc(max(10px, env(safe-area-inset-top)) + 50px); left: 10px; max-width: 46vw; overflow: hidden; text-overflow: ellipsis; font-size: 14px; background: linear-gradient(90deg, #ffe680, #ffb84d); border: 3px solid var(--ink); border-radius: 999px; padding: 2px 16px; font-weight: 700; white-space: nowrap; }
+.chat-log { position: absolute; top: calc(max(10px, env(safe-area-inset-top)) + 92px); left: 10px; width: min(300px, 50vw); font-size: 14px; pointer-events: none !important; }
+.chat-log div { background: rgba(43, 33, 80, 0.62); color: #fff; border-radius: 10px; padding: 2px 8px; margin-bottom: 3px; transition: opacity 1s; overflow-wrap: anywhere; }
+.chat-log div.old { opacity: 0.35; }
+.toasts { position: absolute; top: 190px; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; pointer-events: none !important; }
+
+.actions { position: absolute; right: 12px; bottom: max(14px, env(safe-area-inset-bottom)); display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.act-main { font: 800 20px var(--font); border: 4px solid var(--ink); background: var(--mint); color: #fff; text-shadow: 0 2px 0 var(--ink); border-radius: 999px; padding: 12px 22px; box-shadow: 0 4px 0 var(--ink); cursor: pointer; touch-action: manipulation; user-select: none; }
+.act-main:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+.act-row { display: flex; gap: 8px; }
+.round { width: 54px; height: 54px; border-radius: 50%; border: 3px solid var(--ink); background: var(--paper); font-size: 24px; box-shadow: 0 3px 0 var(--ink); cursor: pointer; }
+.emote-panel { position: absolute; right: 12px; bottom: 150px; display: grid; grid-template-columns: repeat(2, 84px); gap: 8px; }
+.emote-panel button { font-size: 28px; border: 3px solid var(--ink); background: var(--paper); border-radius: 14px; padding: 4px; cursor: pointer; display: flex; flex-direction: column; align-items: center; font-family: var(--font); }
+.emote-panel small { font-size: 12px; font-weight: 700; }
+.chat-bar { position: absolute; left: 10px; right: 10px; bottom: calc(max(14px, env(safe-area-inset-bottom)) + 130px); display: flex; gap: 8px; }
+.chat-bar input { flex: 1; font: 700 17px var(--font); border: 3px solid var(--ink); border-radius: 12px; padding: 8px 12px; }
+.help-desktop { position: absolute; left: 10px; bottom: 8px; font-size: 12px; font-weight: 600; color: #fff; text-shadow: 0 1px 2px #000; pointer-events: none !important; }
+@media (pointer: coarse) { .help-desktop { display: none; } }
+
+/* Joystick */
+.joy-base { position: fixed; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%; background: rgba(255,255,255,0.25); border: 3px solid rgba(43,33,80,0.5); z-index: 6; pointer-events: none; }
+.joy-knob { position: absolute; left: 50%; top: 50%; width: 54px; height: 54px; border-radius: 50%; background: rgba(255,255,255,0.9); border: 3px solid var(--ink); transform: translate(-50%, -50%); }
+
+/* Bảng trượt */
+.sheet { position: fixed; inset: 0; z-index: 15; background: rgba(30, 20, 60, 0.3); display: flex; align-items: flex-end; justify-content: center; }
+.sheet-body { position: relative; width: min(520px, 100%); max-height: 75dvh; overflow-y: auto; padding: 16px; border-radius: 22px 22px 0 0; margin: 0; }
+.sheet-body h3 { margin: 0 0 8px; font-size: 22px; }
+.sheet-close { position: absolute; right: 10px; top: 10px; border: 0; background: none; font-size: 22px; cursor: pointer; color: var(--ink); }
+.bail-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.bail-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; border: 2px solid #e2d8ff; border-radius: 12px; padding: 6px 10px; }
+.bail-row span { display: flex; flex-direction: column; min-width: 0; }
+.bail-row b { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bail-row small { color: #5a4a8a; }
+.menu { display: flex; flex-direction: column; gap: 10px; }
+.help li { margin-bottom: 6px; }
+#kicked .card { padding: 20px; text-align: center; max-width: 360px; }

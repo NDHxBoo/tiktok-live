@@ -1,203 +1,168 @@
-# 🚔 Đi Tù Online – game TikTok LIVE treo máy
+# 🚔 Đi Tù Online 3D
 
-Game tương tác cho TikTok LIVE: người xem **tự "phạm tội" bằng bình luận** để bị cảnh sát hoạt hình bắt vào tù,
-dùng **quà tặng / like / follow** để giảm án, bảo lãnh người khác hoặc phá ngục. Game chạy tự động,
-hiển thị qua một trang web overlay để đưa vào **OBS** hoặc **TikTok LIVE Studio**.
+Nhà tù hoạt hình **3D low-poly** chạy trên trình duyệt: nhiều người chơi cùng lúc, vào ngay không cần đăng nhập,
+tối ưu cho điện thoại, cài được lên màn hình chính (PWA). Kèm **chế độ phát live TikTok**: người xem bình luận/tặng quà
+thì nhân vật mang tên + avatar TikTok của họ xuất hiện và hành động trong nhà tù, chung phòng với người chơi web.
 
-> Toàn bộ nhân vật và trại giam là **hư cấu, hoạt hình** ("Cảnh sát Bánh Bao" áo tím, mũ hồng, huy hiệu bánh donut).
-> Không dùng quân phục, phù hiệu hay logo của lực lượng công an thật. Game chỉ để giải trí:
-> **không cược, không thắng quà, không đổi thưởng.**
-
----
-
-## 1. Cài đặt
-
-Yêu cầu: **Node.js 20 trở lên** (https://nodejs.org).
-
-```bash
-npm install
-cp .env.example .env        # Windows: copy .env.example .env
-npm start
-```
-
-Mở trình duyệt:
+> Nhân vật, trại giam là **hư cấu, hoạt hình**: "Cảnh sát Bánh Bao" áo tím, mũ hồng gắn huy hiệu bánh donut.
+> Không dùng quân phục, phù hiệu, logo hay tên lực lượng công an thật.
+> Chỉ để giải trí: **không cược, không nạp tiền, không đổi thưởng.**
 
 | Trang | Địa chỉ | Dùng để |
 |---|---|---|
-| Overlay | http://localhost:3000/overlay | Đưa vào OBS / LIVE Studio (1080 × 1920) |
-| Điều khiển | http://localhost:3000/control | Bật/tắt, reset, âm lượng, test, sửa tội |
+| Chơi | `/?phong=tu-1` | Trò chơi 3D (điện thoại + máy tính) |
+| Live | `/live?phong=tu-1` | Browser Source dọc 1080×1920 cho OBS / TikTok LIVE Studio |
+| Quản trị | `/admin` | Mật khẩu `ADMIN_PASSWORD` |
 
-Chạy test luật chơi: `npm test`
+---
 
-## 2. Làm theo thứ tự
+## 1. Chạy trên máy tính của bạn
 
-### Bước 1 – Chế độ test (chưa cần live)
-Để `MODE=test` trong `.env`. Bot demo tự sinh bình luận/quà giả để bạn xem game chạy.
-Trên trang điều khiển có thể:
-- Gõ bình luận giả (vd `trộm gà`, `@meou cứu với`), bấm nút tội nhanh.
-- Bấm **Quà nhỏ / vừa / lớn / rất lớn**, hoặc nhập tên quà TikTok + số kim cương để thử cách map quà.
-- Gửi like, follow giả. Đổi người chơi bằng nút 🎲.
-- Tắt/bật bot demo.
+Cần **Node.js 20+** (https://nodejs.org) và Git.
 
-### Bước 2 – Chỉnh đồ hoạ và luật chơi
-- Sửa danh sách tội & mức án, thông số, từ cấm, dòng chữ chạy **ngay trên trang điều khiển** (tự lưu vào `config.json`).
-- Hoặc sửa trực tiếp `config.json` rồi khởi động lại.
-
-### Bước 3 – Kết nối TikTok thật
-Trong `.env`:
+```bash
+git clone https://github.com/NDHxBoo/tiktok-live.git
+cd tiktok-live
+git checkout claude/tiktok-live-prison-game-1d7zqh
+npm install
+cp .env.example .env          # Windows: copy .env.example .env  → mở .env, đặt ADMIN_PASSWORD
+npm run dev
 ```
-MODE=live
-TIKTOK_USERNAME=ten_kenh_cua_ban
-```
-Khởi động lại `npm start`. Hoặc nhập username trên trang điều khiển rồi bấm **Kết nối**.
-Nếu bạn chưa lên live, game tự thử lại liên tục (5 s → 10 s → … tối đa 120 s) cho tới khi kết nối được;
-mất kết nối giữa chừng cũng tự nối lại.
 
-> `tiktok-live-connector` là thư viện không chính thức. Nếu hay bị lỗi kết nối / giới hạn,
-> đăng ký API key miễn phí tại https://www.eulerstream.com rồi điền `EULER_API_KEY` trong `.env`.
+Mở http://localhost:3000 → nhập biệt danh → chọn tội → vào tù.
+Mở thêm tab ẩn danh để thử 2 người chơi cùng phòng. Mở http://localhost:3000/live để xem trang live,
+http://localhost:3000/admin để gửi bình luận/quà TikTok giả (hoặc bật **🤖 Bot demo**).
 
-## 3. Đưa vào OBS / TikTok LIVE Studio
+Chơi thử bằng điện thoại cùng mạng Wi-Fi: mở `http://<IP-máy-tính>:3000` (xem IP bằng `ipconfig` / `ifconfig`).
 
-1. **Thêm nguồn → Browser (Trình duyệt)**.
-2. URL: `http://localhost:3000/overlay`
-3. Width **1080**, Height **1920**.
-4. Tích **"Control audio via OBS"** nếu muốn chỉnh tiếng trong OBS.
-5. Muốn nền trong suốt để chồng lên camera: dùng `http://localhost:3000/overlay?transparent=1`.
+Lệnh khác: `npm run build` (đóng gói giao diện vào `dist/`), `npm start` (chạy bản đóng gói), `npm test` (kiểm thử luật chơi).
+Thử ban đêm: thêm `?gio=21` vào địa chỉ.
 
-Tham số overlay: `?mute=1` tắt tiếng (dùng khi xem thử), `?transparent=1` bỏ nền trời.
-Khi mở overlay trong trình duyệt thường, có thể cần bấm nút **🔊 Bấm để bật âm thanh** (OBS không cần).
+## 2. Cách chơi (web)
 
-## 4. Luật chơi
+1. Nhập biệt danh → chọn tội vui (trộm gà, ăn vụng, quỵt nợ trà sữa…) → Cảnh sát Bánh Bao dẫn bạn qua **bàn tiếp nhận** vào **ô tù**.
+2. Đồng hồ án đếm ngược trên đầu nhân vật. Hết án → ra **sân** tự do.
+3. Điều khiển: **joystick ảo** (nửa trái màn hình), kéo nửa phải để xoay camera. Máy tính: **WASD**, Shift chạy, kéo chuột xoay, cuộn để zoom.
+4. Tương tác: 💬 chat bong bóng (≤60 ký tự, lọc từ cấm), 😀 biểu cảm (vẫy tay, khóc, nhảy, đập song sắt).
+5. Hoạt động: **🏋️ tập tạ** ở sân, **🍲 xếp hàng** nhà ăn, **⛏️ đào hầm** khi ở tù (bấm liên tục – càng nhiều người cùng đào càng nhanh; thông hầm thì mọi tù nhân chui ra sân).
+6. **🤝 Bảo lãnh** người khác ra tù (mỗi 60 giây 1 lần). **Không ai có thể tống người khác vào tù.**
 
-| Hành động | Kết quả |
+Phòng: `?phong=tu-1`, tối đa 30 người chơi web/phòng; đầy thì tự chuyển sang `tu-2`, `tu-3`…
+
+## 3. Chế độ live TikTok
+
+1. Trong `.env`: `TIKTOK_USERNAME=ten_kenh` (hoặc nhập ở `/admin` → Kết nối).
+2. OBS / TikTok LIVE Studio → thêm **Browser Source**: `http://localhost:3000/live?phong=tu-1`, kích thước **1080 × 1920**.
+3. Camera tự lướt qua cổng, dãy phòng giam, sân tập, nhà ăn; tự lao tới chỗ có sự kiện. Không ai tương tác 2 phút → camera đi theo cảnh sát tuần tra và hiện lời mời chơi.
+
+| Người xem làm gì | Kết quả |
 |---|---|
-| Bình luận có từ khoá tội (vd `trộm gà`) | **Chính người đó** bị bắt vào một ô tù, đồng hồ đếm ngược án |
-| Gõ tội khác khi đang ở tù | Cộng dồn án (tối đa `maxSentenceSeconds`) |
-| Hết án | Được thả, chạy ra khỏi màn hình kèm pháo giấy |
-| 🎁 Quà nhỏ | Giảm 30 giây án cho chính mình (× số lượng quà) |
-| 🎁 Quà vừa | Bảo lãnh một người khác ra tù |
-| 🎁 Quà lớn | **Vượt ngục tập thể** – nổ tường, thả toàn bộ |
-| 🎁 Quà rất lớn | Làm **Cai ngục** 5 phút, tên hiện trên đầu màn hình |
-| ❤️ Mỗi 50 like của một người | Giảm 5 giây án cho người đó |
+| Bình luận từ khoá tội (vd `trộm gà`) | Nhân vật mang tên + avatar TikTok của **chính họ** xuất hiện ở cổng và bị dẫn vào ô |
+| Bình luận thường | Hiện bong bóng chat trên đầu nhân vật của họ |
+| Bình luận `đào` khi đang ở tù | Đào hầm cùng mọi người |
+| 🎁 Quà nhỏ | Giảm 30 giây án của mình |
+| 🎁 Quà vừa | Bảo lãnh 1 người (gõ `@tên` hoặc tên trước khi tặng; không chỉ định → người án dài nhất) |
+| 🎁 Quà lớn | **Vượt ngục tập thể**: tường phòng giam nổ, mọi người chạy ra sân |
+| 🎁 Quà rất lớn | Làm **Cai ngục** 5 phút (áo vàng, vương miện, tên trên đầu màn hình) |
+| ❤️ Mỗi 50 like | Giảm 5 giây án |
 | ➕ Follow lần đầu | Miễn bị bắt 1 lần |
 
-**Bảo lãnh chọn ai?** Game đọc bình luận gần nhất (trong 3 phút) của người tặng quà:
-1. `@username` hoặc `@tên` khớp với một tù nhân → bảo lãnh người đó.
-2. Bình luận có chứa tên hiển thị của tù nhân (vd `tha cho Mèo Ú`) → bảo lãnh người đó.
-3. Không chỉ định được → bảo lãnh người đang có án dài nhất.
-Người tặng **không bao giờ** tự bảo lãnh chính mình bằng quà vừa.
+Map quà ở `config.json → gifts` (hoặc `/admin`): xét theo **giftId** → **tên quà** → **số kim cương**. Mỗi lần có quà,
+nhật ký ghi tên/giftId/kim cương để bạn khai báo cho đúng. Người chơi web và người xem TikTok ở chung phòng `rooms.liveRoom`.
 
-**Quá tải:** nhà tù tối đa 24 ô; khi đầy, người có án còn lại ngắn nhất được thả sớm để nhường chỗ.
+## 4. Trang quản trị `/admin`
 
-**Bảng xếp hạng (trong phiên):**
-- 🔥 *Tội phạm nguy hiểm nhất*: tổng thời gian án đã nhận.
-- 😇 *Người tốt nhất*: số người đã cứu (bảo lãnh + số tù nhân được thả khi người đó phá ngục).
-
-**Treo máy:** không ai tương tác 2 phút → cảnh sát đi tuần với đèn pin và hiện lời mời chơi.
+- Xem số người mỗi phòng (web / TikTok / đang ở tù / đang xem live), danh sách nhân vật, chat gần đây.
+- **Kick**, **Chặn** (theo mã thiết bị + IP, lưu `data/bans.json`), bỏ chặn, **xoá chat**, thả hết tù nhân.
+- Sửa **danh sách tội & mức án**, **bảng quà**, thông số, từ cấm, chữ chạy → lưu `config.json`, áp dụng ngay.
+- Gửi **bình luận/quà/like/follow giả** để test khi chưa live; bật bot demo; kết nối/ngắt TikTok.
 
 ## 5. An toàn
 
-- Chỉ người bình luận mới **tự đưa mình** vào tù. Gõ `@người_khác trộm gà` thì **người gõ** đi tù, không phải người bị nhắc tên.
-  Trong code không có đường nào để tống người khác vào tù – người khác chỉ có thể được bảo lãnh **ra**.
-- **Lọc từ cấm** (`bannedWords` trong `config.json` hoặc trang điều khiển):
-  - Bình luận chứa từ cấm bị **bỏ qua hoàn toàn**: không hiển thị, không tính.
-  - Tên/username chứa từ cấm hiển thị thành **"Ẩn danh #n"** và **ẩn ảnh đại diện**.
-  - So khớp theo nguyên từ, giữ nguyên dấu (để "đeo kính", "lớn" không bị bắt nhầm), bắt được kiểu tách chữ `v c l`, `đ.ị.t`.
-    Vì vậy hãy khai báo cả bản có dấu và không dấu nếu cần (vd `địt`, `dit`).
-- Overlay **không bao giờ hiển thị nội dung bình luận** của người xem, chỉ hiện tên tội trong danh sách bạn cấu hình.
-- Chống spam: mỗi người phải cách nhau `commentCooldownSeconds` giây mới phạm tội tiếp được.
-- Trang điều khiển chỉ mở được **từ chính máy chạy game**. Nếu muốn mở từ máy khác: đặt `HOST=0.0.0.0`
-  và `CONTROL_TOKEN=matkhau`, rồi vào `http://IP:3000/control?token=matkhau`.
-- Không có cơ chế cược, thắng quà hay đổi thưởng.
+- Tội chỉ áp lên **chính người gửi**. Gõ `@người_khác trộm gà` → người gõ đi tù. Trong code không có lệnh nào đưa người khác vào tù.
+- Biệt danh web có từ cấm → bị từ chối. Tên TikTok có từ cấm → hiện "Ẩn danh #n", ẩn avatar. Chat có từ cấm → không hiển thị.
+- Chống spam: giới hạn tốc độ chat, nhận án, di chuyển; server kiểm tra vị trí (không đi xuyên tường, không ra khỏi ô khi đang ở tù).
+- Ảnh avatar TikTok đi qua proxy `/avatar` chỉ cho phép tên miền ảnh của TikTok.
+- Mật khẩu admin so sánh an toàn, khoá 1 phút sau 5 lần sai.
 
-## 6. Cấu hình
+## 6. Hiệu năng trên điện thoại
 
-### `.env`
-| Biến | Ý nghĩa | Mặc định |
-|---|---|---|
-| `MODE` | `test` (dữ liệu giả) / `live` (kết nối TikTok) | `test` |
-| `TIKTOK_USERNAME` | username kênh đang live | |
-| `PORT`, `HOST` | cổng / địa chỉ web | `3000`, `127.0.0.1` |
-| `DEMO_BOT` | bật bot demo; để trống = bật ở test, tắt ở live | |
-| `EULER_API_KEY` | API key Euler Stream (tuỳ chọn) | |
-| `CONTROL_TOKEN` | mật khẩu mở trang điều khiển từ máy khác | |
-| `LOG_DIR`, `LOG_LEVEL` | thư mục log, mức log (`debug`/`info`/`warn`/`error`) | `logs`, `info` |
-| `RECONNECT_MIN_SECONDS`, `RECONNECT_MAX_SECONDS` | thời gian chờ kết nối lại | `5`, `120` |
+- Toàn bộ cảnh tĩnh gộp thành ~3 lưới (draw call) bằng vertex color, không texture lớn, không đổ bóng thật (dùng bóng tròn giả).
+- Nhân vật dùng chung hình học/vật liệu; chỉ vẽ ~32 nhân vật gần nhất, ẩn bảng tên ở xa.
+- Tự hạ độ phân giải khi FPS < 40. Three.js ~120 KB gzip, toàn bộ trang < 250 KB gzip.
+- Server gửi vị trí 10 lần/giây, client nội suy cho mượt.
 
-### `config.json`
-```jsonc
-{
-  "game": {
-    "maxCells": 24,               // số ô tù (1–24)
-    "idleSeconds": 120,           // treo máy bao lâu thì đi tuần
-    "maxSentenceSeconds": 3600,   // án tối đa
-    "commentCooldownSeconds": 2,  // chống spam
-    "likesPerReduction": 50,      // số like / 1 lần giảm án
-    "likeReductionSeconds": 5,
-    "followImmunity": 1,          // số lần miễn bắt khi follow lần đầu
-    "wardenMinutes": 5,           // thời gian làm Cai ngục
-    "bailMemorySeconds": 180      // bình luận cũ bao lâu vẫn dùng để chọn người bảo lãnh
-  },
-  "crimes": [ { "keyword": "trộm gà", "seconds": 60, "label": "Trộm gà 🐔" } ],
-  "gifts": {
-    "small":  { "displayName": "...", "names": ["Rose"], "ids": [], "minDiamonds": 1, "reduceSeconds": 30 },
-    "medium": { "names": ["Doughnut"], "ids": [], "minDiamonds": 10 },
-    "large":  { "names": ["Hand Hearts"], "ids": [], "minDiamonds": 100 },
-    "huge":   { "names": ["Money Gun"], "ids": [], "minDiamonds": 500 },
-    "useDiamondFallback": true
-  },
-  "bannedWords": ["..."],
-  "ticker": ["câu chạy thêm ở cuối màn hình"],
-  "audio": { "volume": 0.7 }
-}
+## 7. Deploy lên VPS (Docker)
+
+Trên VPS Ubuntu 22.04/24.04:
+
+```bash
+curl -fsSL https://get.docker.com | sh
+git clone https://github.com/NDHxBoo/tiktok-live.git && cd tiktok-live
+git checkout claude/tiktok-live-prison-game-1d7zqh
+cp .env.example .env   # đặt ADMIN_PASSWORD, DOMAIN=ditu.tenmien.com, TRUST_PROXY=true
+docker compose up -d --build
 ```
 
-**Map quà:** game xét theo thứ tự `ids` (giftId) → `names` (tên quà TikTok, không phân biệt hoa thường/dấu)
-→ nếu `useDiamondFallback` bật thì xếp hạng theo giá kim cương (`minDiamonds`, xét từ hạng cao xuống).
-Tên quà TikTok trả về thường là tiếng Anh (Rose, Doughnut, Hand Hearts…). Mỗi khi có quà, nhật ký
-ghi rõ tên quà, giftId và số kim cương – dùng để khai báo thêm vào `config.json`. Quà combo (giftType 1) chỉ được tính **một lần khi kết thúc combo**, với đúng số lượng.
+- Trỏ bản ghi **A** của tên miền về IP VPS trước; **Caddy** tự cấp HTTPS miễn phí (PWA và cài lên màn hình chính **bắt buộc HTTPS**).
+- `config.json`, `logs/`, `data/` được gắn ra ngoài container nên sửa ở `/admin` không mất khi cập nhật.
+- Cập nhật: `git pull && docker compose up -d --build`. Xem log: `docker compose logs -f app`.
+- OBS trên máy bạn dùng `https://ditu.tenmien.com/live?phong=tu-1`.
 
-## 7. Âm thanh
+> Dockerfile chưa được build thử trong môi trường phát triển (không có Docker daemon); nếu lỗi, gửi log `docker compose build` để sửa.
 
-Các file trong `public/assets/sounds/` được tạo bằng code (`npm run sounds`), không lo bản quyền:
-`siren.wav` (còi), `door.wav` (đóng cửa sắt), `escape.wav` (nổ tường vượt ngục), `release.wav` (được thả),
-`warden.wav` (Cai ngục), `ding.wav` (giảm án), `whistle.wav` (đi tuần).
-Muốn dùng tiếng của riêng bạn: chép đè file **cùng tên**. Âm lượng chỉnh trên trang điều khiển.
+## 8. Chi phí thuê VPS (ước tính)
 
-## 8. Cấu trúc mã nguồn
+**Băng thông/người chơi:** ~15 KB/giây khi phòng đông (60 nhân vật × 10 lần/giây) ≈ 0,12 Mbps.
+Một phòng đầy 30 người ≈ 3,6 Mbps. Nếu trung bình 30 người online 6 giờ/ngày → khoảng **300 GB/tháng** (đa số VPS cho 1–4 TB).
+**CPU/RAM:** server Node.js nhẹ; 1 vCPU/1–2 GB chịu được ~3–5 phòng đầy, 2 vCPU/4 GB ~10 phòng (~300 người).
+
+| Gói | Cấu hình | Phù hợp | Giá tham khảo/tháng |
+|---|---|---|---|
+| Thử nghiệm | 1 vCPU · 1–2 GB · 25–50 GB SSD | Live TikTok + vài chục người chơi | VPS Việt Nam ~100–200 nghìn đ · Vultr/DigitalOcean Singapore ~6–12 USD (~160–320 nghìn đ) |
+| **Khuyến nghị** | 2 vCPU · 4 GB · 50–80 GB SSD | Tối đa ~10 phòng (~300 người) | VPS Việt Nam ~250–450 nghìn đ · Singapore ~24 USD (~630 nghìn đ) |
+| Lớn | 4 vCPU · 8 GB | Nhiều phòng + nhiều buổi live song song | ~600 nghìn – 1,3 triệu đ |
+
+Chi phí khác: tên miền `.com` ~300 nghìn đ/năm (`.vn` ~ 700–900 nghìn đ năm đầu), HTTPS **miễn phí** (Caddy + Let's Encrypt),
+Cloudflare gói Free (tuỳ chọn, hỗ trợ WebSocket). **Tổng cho khởi đầu: khoảng 150–450 nghìn đ/tháng + tên miền.**
+
+Lưu ý chọn VPS:
+- Ưu tiên máy chủ **ở Việt Nam hoặc Singapore** để độ trễ thấp (~20–50 ms). Máy chủ châu Âu/Mỹ rẻ nhưng trễ 180–250 ms, nhân vật sẽ giật.
+- Chọn gói có **băng thông không giới hạn hoặc ≥ 1 TB**, IPv4 riêng.
+- Giá trên là mức tham khảo, thay đổi theo nhà cung cấp và khuyến mãi – kiểm tra lại trên trang của nhà cung cấp trước khi mua.
+- Về sau muốn nhiều server chạy song song thì thêm Redis (socket.io adapter) – code đã tách phòng nên dễ mở rộng.
+
+## 9. Cấu hình
+
+`.env`: xem `.env.example` (mật khẩu admin, TikTok, cổng, proxy, log).
+`config.json`:
+- `rooms`: `maxPlayers` (30), `prefix` (`tu`), `maxRooms`, `liveRoom`.
+- `game`: sức chứa ô, treo máy, án tối đa, chống spam, like, follow, Cai ngục, cooldown bảo lãnh web, số nhân vật TikTok tối đa,
+  độ dài chat, thông số đào hầm (`digTapPercent`, `digDecayPercentPerSecond`, `digCooldownSeconds`, `digKeyword`).
+- `crimes`, `gifts`, `bannedWords`, `ticker`.
+
+## 10. Cấu trúc mã nguồn
 
 ```
-src/
-  index.js               Khởi động, nối các module với nhau
-  config.js              Đọc .env và config.json, lưu config
-  logger.js              Ghi log ra console + logs/YYYY-MM-DD.log
-  game/PrisonGame.js     Luật chơi (bắt, cộng án, thả, quà, like, follow, bảng xếp hạng, treo máy)
-  game/filter.js         Bộ lọc từ cấm
-  sources/tiktokSource.js Kết nối TikTok LIVE + tự kết nối lại
-  sources/normalize.js   Chuẩn hoá dữ liệu TikTok
-  sources/demoBot.js     Bot sinh sự kiện giả
-  web/server.js          Express + socket.io (/overlay, /control)
-  utils/text.js          Xử lý tiếng Việt (bỏ dấu, tách từ)
-public/
-  overlay.html, css/overlay.css, js/overlay.js, js/art.js (nhân vật SVG), js/sound.js
-  control.html, css/control.css, js/control.js
-  assets/sounds/*.wav
-scripts/generate-sounds.js
-test/                    Kiểm thử luật chơi, bộ lọc, chuẩn hoá dữ liệu (node --test)
+shared/            Dùng chung server + client
+  map.js           Bản đồ, ô tù, vật cản, lộ trình dẫn giải
+  protocol.js      Mã hoạt ảnh, trạng thái
+  filter.js text.js  Lọc từ cấm, xử lý tiếng Việt
+server/
+  index.js         Khởi động: Express + socket.io + Vite (dev)
+  RoomManager.js   Chia phòng, kết nối người chơi, vòng lặp 10 lần/giây
+  Room.js          Luật chơi trong phòng (nhận án, bảo lãnh, quà, đào hầm, nhà ăn, AI nhân vật TikTok)
+  rules.js         Hàm luật thuần (khớp tội, map quà, chọn người bảo lãnh)
+  admin.js         Kênh quản trị có mật khẩu
+  bans.js avatarProxy.js config.js logger.js
+  sources/         tiktokSource.js (tự kết nối lại), normalize.js, demoBot.js
+client/
+  index.html live.html admin.html
+  src/play.js live.js admin.js
+  src/three/       world.js (cảnh + ngày/đêm), character.js, actors.js, fx.js, build.js, renderer.js
+  src/audio.js     Nhạc nền tự tổng hợp + hiệu ứng
+  src/ui/joystick.js
+  public/          manifest, service worker, icon, âm thanh
+test/              node --test
+Dockerfile docker-compose.yml Caddyfile
 ```
-
-Luồng dữ liệu: `TikTok / trang điều khiển / bot demo → PrisonGame → socket.io → overlay`.
-Server giữ toàn bộ trạng thái; overlay mở lại hay mất kết nối thì tự đồng bộ lại.
-
-## 9. Xử lý sự cố
-
-| Hiện tượng | Cách xử lý |
-|---|---|
-| `Streamer chưa live` | Bình thường – game tự thử lại tới khi bạn lên live |
-| `Failed to retrieve Room ID` liên tục | Kiểm tra username, mạng; thử thêm `EULER_API_KEY` |
-| Overlay không có tiếng | Trong OBS: tích "Control audio via OBS"; trình duyệt: bấm nút 🔊 |
-| Không thấy avatar | Một số ảnh TikTok chặn tải – game tự hiện chữ cái đầu thay thế |
-| Quà không có tác dụng | Xem nhật ký (dòng `Quà "…" (giftId=…)`) rồi thêm tên/giftId vào `config.json` |
-| `Không mở được cổng 3000` | Đổi `PORT` trong `.env` |
-
-Log được ghi ở thư mục `logs/` theo ngày.

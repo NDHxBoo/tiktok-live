@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#7b5cff" />
+  <meta name="description" content="Đi Tù Online – nhà tù hoạt hình 3D vui nhộn, nhiều người chơi, vào ngay không cần đăng nhập." />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <title>Đi Tù Online 3D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet" />
+</head>
+<body class="play">
+  <canvas id="c"></canvas>
+
+  <!-- Màn hình bắt đầu -->
+  <section id="start" class="sheet-screen">
+    <div class="card start-card">
+      <div class="logo">ĐI TÙ <span>ONLINE</span></div>
+      <p class="sub">🍩 Trại giam Bánh Bao – vào chơi ngay, không cần đăng nhập</p>
+      <label class="field">
+        <span>Biệt danh của bạn</span>
+        <input id="nick" maxlength="16" autocomplete="off" placeholder="vd: Mèo Ú" />
+      </label>
+      <div class="field">
+        <span>Chọn tội để "nhận án" 😆</span>
+        <div id="crime-list" class="crime-list"></div>
+      </div>
+      <button id="btn-start" class="btn big" disabled>🚔 Nhận án & vào tù</button>
+      <p class="note" id="start-msg"></p>
+      <p class="note small">Chỉ để vui: không cược, không nạp tiền, không đổi thưởng. Bạn chỉ tự đưa mình vào tù, và có thể bảo lãnh người khác ra.</p>
+      <p class="note small" id="room-note"></p>
+    </div>
+  </section>
+
+  <!-- Giao diện trong game -->
+  <section id="hud" class="hidden">
+    <div class="topbar">
+      <div class="pill" id="room-pill">🏠 …</div>
+      <button class="icon-btn" id="btn-mute" title="Tắt/bật tiếng">🔊</button>
+      <button class="icon-btn" id="btn-menu" title="Menu">☰</button>
+    </div>
+    <div class="status-card" id="status-card"></div>
+    <div class="warden-banner hidden" id="warden"></div>
+    <div class="chat-log" id="chat-log"></div>
+    <div class="toasts" id="toasts"></div>
+
+    <div class="actions">
+      <button class="act-main hidden" id="btn-act"></button>
+      <div class="act-row">
+        <button class="round" id="btn-emote" title="Biểu cảm">😀</button>
+        <button class="round" id="btn-chat" title="Chat">💬</button>
+        <button class="round" id="btn-bail" title="Bảo lãnh">🤝</button>
+      </div>
+    </div>
+
+    <div class="emote-panel hidden" id="emote-panel">
+      <button data-emote="wave">👋<small>Vẫy tay</small></button>
+      <button data-emote="cry">😭<small>Khóc</small></button>
+      <button data-emote="dance">🕺<small>Nhảy</small></button>
+      <button data-emote="bang">💢<small>Đập song sắt</small></button>
+    </div>
+
+    <form class="chat-bar hidden" id="chat-bar" autocomplete="off">
+      <input id="chat-input" maxlength="60" placeholder="Nói gì đó… (tối đa 60 ký tự)" enterkeyhint="send" />
+      <button class="btn">Gửi</button>
+    </form>
+    <div class="help-desktop">WASD/mũi tên: đi • Shift: chạy • kéo chuột: xoay • Enter: chat • 1-4: biểu cảm • E: hành động</div>
+  </section>
+
+  <!-- Bảng chọn dạng trượt lên -->
+  <section id="sheet" class="sheet hidden">
+    <div class="sheet-body card">
+      <button class="sheet-close" id="sheet-close">✕</button>
+      <div id="sheet-content"></div>
+    </div>
+  </section>
+
+  <div id="kicked" class="sheet-screen hidden"><div class="card"><h2>😢</h2><p id="kicked-msg"></p><button class="btn" onclick="location.reload()">Vào lại</button></div></div>
+
+  <script type="module" src="/src/play.js"></script>
+</body>
+</html>

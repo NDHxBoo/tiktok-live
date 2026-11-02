@@ -1,0 +1,27 @@
+/* Biến màu & thành phần dùng chung */
+:root {
+  --ink: #2b2150;
+  --pink: #ff5fa2;
+  --purple: #7b5cff;
+  --yellow: #ffcf3f;
+  --mint: #3fc9b0;
+  --red: #ff5e6c;
+  --paper: #fff8ec;
+  --font: 'Baloo 2', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #8fd6ff; font-family: var(--font); color: var(--ink); }
+.hidden { display: none !important; }
+canvas#c { position: fixed; inset: 0; width: 100vw; height: 100vh; height: 100dvh; display: block; touch-action: none; }
+.card { background: var(--paper); border: 4px solid var(--ink); border-radius: 22px; box-shadow: 0 6px 0 var(--ink); }
+.btn { font: 800 17px var(--font); border: 3px solid var(--ink); background: var(--yellow); color: var(--ink); border-radius: 14px; padding: 8px 16px; cursor: pointer; box-shadow: 0 3px 0 var(--ink); }
+.btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--ink); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn.big { font-size: 22px; padding: 10px 20px; width: 100%; }
+.btn.ghost { background: #fff; }
+.note { font-size: 15px; margin: 8px 0 0; color: #5a4a8a; }
+.note.small { font-size: 13px; }
+.toast { background: var(--paper); border: 3px solid var(--ink); border-radius: 999px; padding: 4px 16px; font-weight: 700; box-shadow: 0 3px 0 var(--ink); animation: pop 0.3s cubic-bezier(.2,1.6,.4,1); max-width: 92vw; }
+.toast.out { animation: fade 0.4s forwards; }
+@keyframes pop { from { transform: scale(0.4); opacity: 0; } }
+@keyframes fade { to { opacity: 0; transform: translateY(-10px); } }

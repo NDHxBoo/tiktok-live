@@ -1,14 +1,15 @@
-'use strict';
+
 /**
  * Tạo các file âm thanh hiệu ứng (WAV) bằng tổng hợp sóng – không cần tải gì từ mạng,
  * không lo bản quyền. Chạy: npm run sounds
  * Bạn có thể thay bằng file của riêng mình, giữ nguyên tên file trong public/assets/sounds/.
  */
-const fs = require('fs');
-const path = require('path');
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const RATE = 22050;
-const OUT = path.resolve(__dirname, '../public/assets/sounds');
+const OUT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../client/public/assets/sounds');
 fs.mkdirSync(OUT, { recursive: true });
 
 // Bộ sinh số ngẫu nhiên cố định để file tạo ra luôn giống nhau

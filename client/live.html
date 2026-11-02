@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Đi Tù Online – Live</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet" />
+</head>
+<body class="live">
+  <canvas id="c"></canvas>
+  <!-- Lớp giao diện 1080x1920, tự co giãn vừa khung OBS -->
+  <div id="stage">
+    <header class="l-head">
+      <div class="l-sign">ĐI TÙ <span>ONLINE</span></div>
+      <div class="l-room" id="l-room"></div>
+    </header>
+    <div class="l-warden hidden" id="l-warden"></div>
+    <section class="l-boards">
+      <div class="l-board danger"><h3>🔥 Tội phạm nguy hiểm nhất</h3><ol id="b-danger"></ol></div>
+      <div class="l-board good"><h3>😇 Người tốt nhất</h3><ol id="b-good"></ol></div>
+    </section>
+    <div class="l-tunnel" id="l-tunnel"><span>⛏️ Hầm vượt ngục – gõ "<b id="dig-kw">đào</b>" để đào</span><i></i></div>
+    <div class="l-banner hidden" id="l-banner"></div>
+    <div class="l-invite hidden" id="l-invite">
+      <div class="l-invite-title">🔦 Cảnh sát đang đi tuần…</div>
+      <div>Trại giam vắng tanh! Bình luận</div>
+      <div class="l-invite-crime" id="l-invite-crime">"trộm gà"</div>
+      <div class="small">để nhân vật của bạn vào tù chơi! 😆</div>
+    </div>
+    <div class="l-toasts" id="l-toasts"></div>
+    <footer class="l-ticker"><div class="l-track" id="l-track"></div></footer>
+  </div>
+  <button id="sound-unlock" class="hidden">🔊 Bấm để bật âm thanh</button>
+  <script type="module" src="/src/live.js"></script>
+</body>
+</html>
